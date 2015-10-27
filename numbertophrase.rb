@@ -30,7 +30,8 @@ end
 
 def converttoteens(n)
 	newstring = " "
-	if n==1 then newstring = "eleven"
+	if n==0 then newstring = "ten"
+	elsif n==1 then newstring = "eleven"
 	elsif n==2 then newstring = "twelve"
 	elsif n==3 then newstring = "thirteen"
 	elsif n==4 then newstring = "fourteen"
@@ -46,15 +47,19 @@ end
 def numbertophrase(n)
 	if n.to_i > 999999999999
 		puts "Choose a number under one trillion."
+	elsif n.to_i == 0 then return "zero"
 	else
 		englishstring = ""
 		number = n.to_s
 		count = number.length
 		teen = false
 		number.each_char do |i|
-			if i.to_i == 0 then count -= 1
+			if i.to_i == 0 && teen == false then count -= 1
 			else
-				if teen == true
+				if i.to_i == 0 && teen == true then
+					englishstring = englishstring + converttoteens(i.to_i) + " "
+					teen = false
+				elsif i.to_i != 0 && teen == true
 					englishstring = englishstring + converttoteens(i.to_i) + " "
 					teen = false
 				elsif (count+1) % 3 == 0 && i.to_i!=1 then englishstring = englishstring + converttotens(i.to_i)
@@ -70,9 +75,9 @@ def numbertophrase(n)
 			end
 		end
 	end
-	return englishstring.chomp("-")
+	return englishstring.strip().chomp("-")
 end
 
-puts "Enter a number under 1 trillion. Do not use leading zeroes."
+puts "Enter a number that is 12 digits or less."
 value = gets.chomp
 puts numbertophrase(value.to_i)
