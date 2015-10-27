@@ -1,4 +1,5 @@
 def converttoenglish(n)
+	#Converts digits into words.
 	newstring = " "
 	if n==1 then newstring = "one"
 	elsif n==2 then newstring = "two"
@@ -14,6 +15,7 @@ def converttoenglish(n)
 end
 
 def converttotens(n)
+	#Converts digits in the tens columns into words.
 	newstring = " "
 	if n==1 then newstring = "one"
 	elsif n==2 then newstring = "twenty-"
@@ -29,6 +31,7 @@ def converttotens(n)
 end
 
 def converttoteens(n)
+	#Only when preceded by a one, converts digits into teens.
 	newstring = " "
 	if n==0 then newstring = "ten"
 	elsif n==1 then newstring = "eleven"
@@ -45,15 +48,24 @@ def converttoteens(n)
 end
 
 def numbertophrase(n)
-	if n.to_i > 999999999999
-		puts "Choose a number under one trillion."
-	elsif n.to_i == 0 then return "zero"
+	#Only allow numbers under one trillion.
+	while 0 > n.to_i && n.to_i > 999999999999
+		puts "That number is invalid. Choose a positive number under one trillion."
+		n = gets.chomp
+	end
+
+	#If the number is 0, return zero and skip everything.
+	if n.to_i == 0 then return "zero"
+
+	#Set the final answer to englishstring, convert n to a string, set a counter, and a boolean that
+	#states whether the previous number was a one in a tens column. 	
 	else
 		englishstring = ""
 		number = n.to_s
 		count = number.length
 		teen = false
 		number.each_char do |i|
+			#For each character, determine its position and value.
 			if i.to_i == 0 && teen == false then 
 				if count == 10 then englishstring.concat("billion ") end
 				if count == 7 then englishstring.concat("million ") end
@@ -82,6 +94,6 @@ def numbertophrase(n)
 	return englishstring.strip().chomp("-")
 end
 
-puts "Enter a number that is 12 digits or less."
+puts "Enter a positive number that has 12 digits or fewer."
 value = gets.chomp
 puts numbertophrase(value.to_i)
