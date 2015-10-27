@@ -54,7 +54,6 @@ def numbertophrase(n)
 		count = number.length
 		teen = false
 		number.each_char do |i|
-			puts count
 			if i.to_i == 0 && teen == false then 
 				if count == 10 then englishstring.concat("billion ") end
 				if count == 7 then englishstring.concat("million ") end
