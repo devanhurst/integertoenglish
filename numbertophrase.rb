@@ -70,7 +70,7 @@ def numbertophrase(n)
 			end
 		end
 	end
-	return englishstring
+	return englishstring.chomp("-")
 end
 
 puts "Enter a number under 1 trillion. Do not use leading zeroes."
