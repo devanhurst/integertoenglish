@@ -33,16 +33,17 @@ end
 def converttoteens(n)
 	#Only when preceded by a one, converts digits into teens.
 	newstring = " "
-	if n==0 then newstring = "ten"
-	elsif n==1 then newstring = "eleven"
-	elsif n==2 then newstring = "twelve"
-	elsif n==3 then newstring = "thirteen"
-	elsif n==4 then newstring = "fourteen"
-	elsif n==5 then newstring = "fifteen"
-	elsif n==6 then newstring = "sixteen"
-	elsif n==7 then newstring = "seventeen"
-	elsif n==8 then newstring = "eighteen"
-	elsif n==9 then newstring = "nineteen"
+	case n
+	when n==0 then newstring = "ten"
+	when n==1 then newstring = "eleven"
+	when n==2 then newstring = "twelve"
+	when n==3 then newstring = "thirteen"
+	when n==4 then newstring = "fourteen"
+	when n==5 then newstring = "fifteen"
+	when n==6 then newstring = "sixteen"
+	when n==7 then newstring = "seventeen"
+	when n==8 then newstring = "eighteen"
+	when n==9 then newstring = "nineteen"
 	end
 	return newstring
 end
@@ -67,9 +68,9 @@ def numbertophrase(n)
 		number.each_char do |i|
 			#For each character, determine its position and value.
 			if i.to_i == 0 && teen == false then 
-				if count == 10 then englishstring.concat("billion ") end
-				if count == 7 then englishstring.concat("million ") end
-				if count == 4 then englishstring.concat("thousand ") end
+				if count == 10 then englishstring << "billion " end
+				if count == 7 then englishstring << "million " end
+				if count == 4 then englishstring << "thousand " end
 				count -= 1
 			else
 				if i.to_i == 0 && teen == true then
@@ -83,10 +84,10 @@ def numbertophrase(n)
 				else 
 					englishstring = englishstring + converttoenglish(i.to_i).to_s + " "
 				end
-				if count % 3 == 0 then englishstring.concat("hundred ") end
-				if count == 10 then englishstring.concat("billion ") end
-				if count == 7 then englishstring.concat("million ") end
-				if count == 4 then englishstring.concat("thousand ") end
+				if count % 3 == 0 then englishstring << "hundred " end
+				if count == 10 then englishstring << "billion " end
+				if count == 7 then englishstring << "million " end
+				if count == 4 then englishstring << "thousand " end
 				count -= 1
 			end
 		end
